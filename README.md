@@ -17,5 +17,8 @@
 - Initial commit of the `SpotifyData.ipynb` file
 - Additional changes to the readme file
 
+### 1.2 (11/1/24)
+- Adjustments in the cleaning of dataset
+
 ## References
 1. https://www.youtube.com/watch?v=iaZQF8SLHJs&ab_channel=Ryan%26MattDataScience
