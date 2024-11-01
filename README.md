@@ -20,7 +20,7 @@
 - Additional changes to the readme file
 
 ### 1.2 (11/1/24)
-- Adjustments in the cleaning of dataset
+- Adjustments and additions in the `Spotify_Clean.ipynb` file
 - Adjustments and additions in the `SpotifyData.ipynb` file
 - Additional changes to the readme file
 
