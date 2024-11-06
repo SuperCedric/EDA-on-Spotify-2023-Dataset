@@ -176,7 +176,7 @@ streams_statsdf
 sns.displot(spotifydf, x = 'released_year', aspect = 2, kde = True, discrete = True)
 ```
 ![image](https://github.com/user-attachments/assets/436bbce7-d724-401a-8b5e-c836caed24c1)
-!
+Because the number of years are highly numbered, its count should be lessened in order to analyze the trend of the graph more clearly. To shorten it, let's eliminate some outliers and limit the span of the years from 2000 - 2023.
 ```python
 #graphing of distribution plot of the number of songs as a function of their release date
 sns.displot((spotifydf[spotifydf['released_year'] >= 2000]), x = 'released_year', aspect = 2, kde = True, discrete = True)
