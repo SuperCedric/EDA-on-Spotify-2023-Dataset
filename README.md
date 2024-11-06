@@ -51,6 +51,7 @@ First, we check if there are any null values in the dataset
 spotifyclean.isnull().any()
 ```
 ![image](https://github.com/user-attachments/assets/613f074e-e4cc-4ad5-86c1-d63a754177dc)
+
 Since there are null values, remove them from the dataset 
 ```python
 #print the remaining rows after dropping the null values
