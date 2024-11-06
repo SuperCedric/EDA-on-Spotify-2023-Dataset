@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2f8985d7-3309-4936-96c7-22430ce4141d)# Exploratory Data Analysis on Spotify 2023 Dataset
+# Exploratory Data Analysis on Spotify 2023 Dataset
 This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spotify Songs 2023` Dataset using Python.
 
 ## INTRODUCTION
@@ -220,6 +220,7 @@ print('In the distribution graph of "artist_count", there are', outlier(spotifyd
 #display the head of the table, sorted in descending order in streams.
 spotifydf.head()[['track_name','artist(s)_name','streams']]
 ```
+![image](https://github.com/user-attachments/assets/9d7558c6-03a2-4094-b912-daf341d29dfc)
 ```python
 #display the top 5 most streamed songs in the dataset using a bar graph
 plt.figure(figsize=(12,6))
@@ -227,6 +228,7 @@ sns.barplot(spotifydf.head(),x='track_name',y='streams', dodge = 'auto' )
 plt.tick_params(axis = 'x',rotation = 12)
 plt.title('Top 5 Most Streamed Songs')
 ```
+![image](https://github.com/user-attachments/assets/6c43dcf3-27a6-4f08-97df-6fb8e0c7fca9)
 !
 - Who are the top 5 most frequent artists based on the number of tracks in the dataset?
 ```python
@@ -234,7 +236,8 @@ plt.title('Top 5 Most Streamed Songs')
 spotifydf['artist(s)_name'] = spotifydf['artist(s)_name'].str.split(',')
 spotifydf
 ```
-
+![image](https://github.com/user-attachments/assets/ea2b15c5-7860-455c-b890-6773a31ce21a)
+!
 ```python
 #create a new dataframe to separate all the list of artists in a different column
 artistsdf = (spotifydf.loc[:, ['artist(s)_name']]).explode('artist(s)_name')
@@ -247,6 +250,7 @@ artist_count.index = range(1, len(artist_count) + 1)
 print("The Top 5 Most Frequent Artists Are:")
 artist_count.head()
 ```
+![image](https://github.com/user-attachments/assets/297e9e45-e130-4940-acfd-f3b440626ebc)
 ```python
 #create a bar graph of the most frequent artists
 plt.figure(figsize=(12,6))
@@ -254,6 +258,7 @@ sns.barplot(artist_count.head(), x = 'artist(s)_name', y = 'count')
 plt.title('Top 5 Most Frequent Artists')
 plt.ylabel('Number of Appearances')
 ```
+![image](https://github.com/user-attachments/assets/72e7dd42-dbd9-49b2-8de9-a23f1262cde3)
 ### Temporal Trends
 - Analyze the trends in the number of tracks released over time. Plot the number of tracks released per year.
 ```python
@@ -263,6 +268,7 @@ sns.lineplot(x = yearlytracks.index , y = yearlytracks.values)
 plt.title('Number of Tracks Released per Year')
 plt.ylabel('Number of Tracks')
 ```
+![image](https://github.com/user-attachments/assets/3f33b812-fc79-4acb-ad6a-4f07c4798a89)
 - Does the number of tracks released per month follow any noticeable patterns? Which month sees the most releases?
 ```python
 #create a line graph of the number of tracks released per month
@@ -274,6 +280,8 @@ plt.ylabel('Number of Tracks')
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 plt.xticks(ticks = monthlytracks.index, labels = months)
 ```
+![image](https://github.com/user-attachments/assets/10449dba-a356-4b03-88da-71bd8f7f2d46)
+!
 ```python
 #for loop to create line plots the years 2015 to 2024
 plt.figure(figsize=(12,6))
@@ -285,6 +293,8 @@ plt.title('Number of tracks Released per Month from 2018-2023')
 plt.ylabel('Number of Tracks')
 plt.xticks(ticks = monthlytracks.index, labels = months)
 ```
+![image](https://github.com/user-attachments/assets/a06eab70-9573-41c3-b446-092f351edb8f)
+!
 ### Genre and Music Characteristics
 - Examine the correlation between streams and musical attributes like bpm, danceability_%, and energy_%. Which attributes seem to influence streams the most?
 ```python
@@ -293,6 +303,8 @@ plt.figure(figsize=(12,6))
 sns.heatmap(spotifydf[['streams','bpm','danceability_%','valence_%','energy_%','acousticness_%','instrumentalness_%','liveness_%','speechiness_%']].corr(), annot=True, cmap = 'RdBu')
 plt.title('Correlation of Streams and Music Characteristics')
 ```
+![image](https://github.com/user-attachments/assets/bc8fa0e8-abee-4434-b264-cf7b923d6833)
+!
 - Is there a correlation between danceability_% and energy_%?
 ```python
 #create a heatmap of the correlation of streams to the 6 other variables
@@ -300,6 +312,8 @@ plt.figure(figsize=(12,6))
 sns.heatmap(spotifydf[['danceability_%','valence_%','energy_%','acousticness_%']].corr(), annot=True, cmap = 'RdBu')
 plt.title('Correlation of Different Music Characteristics')
 ```
+![image](https://github.com/user-attachments/assets/19ccbeb1-99c5-42d6-b280-e6732e4c3df1)
+!
 - How about valence_% and acousticness_%?
 
 ### Platform Popularity
@@ -320,6 +334,8 @@ plt.figure(figsize=(12,6))
 sns.barplot(platformplaylists,x = 'Playlists', y = 'Platform', orient='h')
 plt.title('Number of Playlists in each Platform')
 ```
+![image](https://github.com/user-attachments/assets/7b0128bb-ee72-454e-8a29-7d72efbe0a13)
+
 ### Advanced Analysis
 - Based on the streams data, can you identify any patterns among tracks with the same key or mode (Major vs. Minor)?
 #### Keys
@@ -331,6 +347,8 @@ plt.figure(figsize=(12,6))
 sns.barplot(streamsofkeys, x = 'key', y = 'streams', hue = 'key', palette = 'muted')
 plt.title('Number of Streams per Key')
 ```
+![image](https://github.com/user-attachments/assets/e77895f8-7cf0-4c62-be8e-8903268de771)
+!
 ```python
 #import necessary library to use z-score function
 from scipy.stats import zscore
@@ -351,6 +369,14 @@ plt.title('Z-Score Normalized Streams per Key')
 plt.xlabel('Key')
 plt.ylabel('Z-Score of Streams')
 ```
+![image](https://github.com/user-attachments/assets/fa0e8baf-0566-4b57-a1a4-7d426ddce3b0)
+!
+```python
+print(streamsofkeys)
+print('The average number of streams of all the songs is', np.floor(streamsofkeys['streams'].mean()))
+```
+![image](https://github.com/user-attachments/assets/7a3233a6-6cef-4142-b383-4e5e5137841b)
+!
 #### Modes
 ```python
 streamsofmodes = spotifydf[['streams','mode']].groupby('mode').sum('streams').reset_index().sort_values('streams', ascending = False)
@@ -358,12 +384,17 @@ streamsofmodes
 sns.barplot(spotifydf, x = 'mode', y = 'streams')
 plt.title('Number of Streams of Major vs Minor')
 ```
+![image](https://github.com/user-attachments/assets/32c54d0b-17a1-46d7-aa9b-f53b314e61e2)
+
 ```python
 plt.figure(figsize=(12,6))
 sns.violinplot(spotifydf,x = 'mode', y = 'streams')
 plt.title('Number of Streams of Major vs Minor')
 ```
+![image](https://github.com/user-attachments/assets/355686e2-20a6-418b-8915-c2955d8694d1)
+!
 - Do certain genres or artists consistently appear in more playlists or charts? Perform an analysis to compare the most frequently appearing artists in playlists or charts.
+#### Playlists
 ```python
 #create a new column with the sum of the playlists in all platforms
 spotifydf['total_playlists'] = spotifydf['in_spotify_playlists'] + spotifydf['in_apple_playlists'] + spotifydf['in_deezer_playlists']
@@ -386,12 +417,17 @@ artistsplaylists.index = range(1, len(artistsplaylists) + 1)
 #display the top 5 most frequently appearing artist in playlists
 artistsplaylists.head()
 ```
+![image](https://github.com/user-attachments/assets/480bdaf4-67b8-4a34-a212-16c491d2c7e3)
+!
 ```python
 #create the barplot to visualize the differences in their frequency
 plt.figure(figsize=(12,6))
 sns.barplot(artistsplaylists.head(),x = 'artist(s)_name', y = 'total_playlists')
 plt.title('Frequency of Artists in Playlists')
 ```
+![image](https://github.com/user-attachments/assets/7e9009f4-abeb-40e7-bbc6-403bc5085c4b)
+!
+#### Charts
 ```python
 #create a new column with the sum of the charts in all platforms
 spotifydf['total_charts'] = spotifydf['in_spotify_charts'] + spotifydf['in_apple_charts'] + spotifydf['in_deezer_charts'] + spotifydf['in_shazam_charts']
@@ -414,12 +450,15 @@ artistscharts.index = range(1, len(artistscharts) + 1)
 #display the top 5 most frequently appearing artist in charts
 artistscharts.head()
 ```
+![image](https://github.com/user-attachments/assets/77c2f70a-4dcc-4273-8538-be24125519b1)
 ```python
 #create the barplot to visualize the differences in their frequency
 plt.figure(figsize=(12,6))
 sns.barplot(artistscharts.head(),x = 'artist(s)_name', y = 'total_charts')
 plt.title('Frequency of Artists in Charts')
 ```
+![image](https://github.com/user-attachments/assets/452af2ce-1ecb-41eb-b9c9-07113836d2d8)
+
 ## Insights and Recommendations
 - Since the track_name column contains special characters from various languages that `UTF-8` encoding cannot handle, I used `latin1` encoding to import the `spotify-2023.csv` file into the notebook.
 - The dataset includes duplicate songs, missing values, and an unusual string entry in the streams column, which appears to be an error from data collection.
