@@ -519,6 +519,6 @@ plt.title('Frequency of Artists in Charts')
   - Cedric Kurt Taguba - [@SuperCedric](https://github.com/SuperCedric)
 
 ## REFERENCES
-[^3] https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-202
-[^2] https://www.youtube.com/watch?v=iaZQF8SLHJs&ab_channel=Ryan%26MattDataScience
-[^1] https://www.linkedin.com/advice/0/how-can-you-use-pandas-detect-correct-outliers-skills-data-science-zl5oe#:~:text=Calculate%20the%20IQR%20by%20subtracting,to%20filter%20out%20the%20outliers.
+[^3]: https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-202
+[^2]: https://www.youtube.com/watch?v=iaZQF8SLHJs&ab_channel=Ryan%26MattDataScience
+[^1]: https://www.linkedin.com/advice/0/how-can-you-use-pandas-detect-correct-outliers-skills-data-science-zl5oe#:~:text=Calculate%20the%20IQR%20by%20subtracting,to%20filter%20out%20the%20outliers.
