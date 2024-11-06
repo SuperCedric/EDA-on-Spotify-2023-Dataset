@@ -1,7 +1,7 @@
 # Exploratory Data Analysis on Spotify 2023 Dataset
 This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spotify Songs 2023` Dataset using Python.
 
-TABLE OF CONTENTS
+## TABLE OF CONTENTS
 
 - INTRODUCTION
 - DEPENDENCIES
