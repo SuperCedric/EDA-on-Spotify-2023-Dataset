@@ -1,6 +1,20 @@
 # Exploratory Data Analysis on Spotify 2023 Dataset
 This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spotify Songs 2023` Dataset using Python.
 
+TABLE OF CONTENTS
+
+- INTRODUCTION
+- DEPENDENCIES
+- CODE EXPLANATION
+    - DATASET CLEANING
+    - ANALYSIS
+- INSIGHTS AND RECOMMENDATION
+- CHANGELOG
+- BUILT WITH
+- LIBRARIES USED
+- AUTHOR
+- REERENCES
+
 ## INTRODUCTION
 This project presents an exploratory data analysis (EDA) of a Spotify dataset containing detailed information about various music tracks, artists, and playlists. The primary objective is to uncover patterns and trends related to musical characteristics, popularity metrics, temporal release trends, and platform preferences, which can provide insights to artists, labebls, and streaming services. To ensure a clear and logical flow of analysis, we have outlined guiding questions to address.
 
@@ -25,18 +39,19 @@ import seaborn as sns
 ```
 from scipy.stats import zscore
 ```
+# CODE EXPLANATION
 ## DATASET CLEANING
 Before addressing the guide questions, it's essential to clean the dataset to ensure data accuracy, consistency, and reliability of the analysis. Removing errors, duplicates, incomplete entries helps prevent skewed results and enhances the quality of insights. Standardizing formats and datatypes also allow for smoother comparisons and easier manipulation across analyses.
 
 ### Included in the `Spotify_Clean.ipynb` file are the Python codes used for data cleaning processes:
 ### Checking for null values
-> First, we check if there are any null values in the dataset
+First, we check if there are any null values in the dataset
 ```python
 #check for any null values 
 spotifyclean.isnull().any()
 ```
 ![image](https://github.com/user-attachments/assets/613f074e-e4cc-4ad5-86c1-d63a754177dc)
-> Since there are null values, remove them from the dataset 
+Since there are null values, remove them from the dataset 
 ```python
 #print the remaining rows after dropping the null values
 spotifyclean = spotifyclean.dropna()
@@ -44,13 +59,13 @@ print(f"After dropping the rows with null values, we are now left with {spotifyc
 ```
 ![image](https://github.com/user-attachments/assets/2130b64b-8f04-4a62-be29-69396ed112ba)
 ### Checking for duplicates
-> Check for any duplicated songs
+Check for any duplicated songs
 ```python
 #checks for duplicate songs (rows that have the same song name and artist)
 spotifyclean[spotifyclean.duplicated(subset=['track_name', 'artist(s)_name'], keep = False)].sort_values(by='track_name')
 ```
 ![image](https://github.com/user-attachments/assets/146ce637-33e5-4483-b328-b092672dc71d)
-> Drop the duplicated rows and keep the one with the higher number of streams
+Drop the duplicated rows and keep the one with the higher number of streams
 ```python
 #print the resulting number of duplicated rows
 print(f"The Spotify dataset contains 3 duplicates which must be removed.")
@@ -60,12 +75,12 @@ print(f"After dropping the duplicated rows, we are now working with {spotifyclea
 ```
 ![image](https://github.com/user-attachments/assets/e2a68e76-9e4d-45f5-880d-3952b222f7dc)
 ### Check for unwanted values and change certain datatypes
-> Check the rows with `object` datatypes
+Check the rows with `object` datatypes
 ```python
 #checks the datatypes of each column if each column has the correct datatype
 spotifyclean.dtypes
 ```
-> Change the rows with numerical values from string to int/float for data visualization
+Change the rows with numerical values from string to int/float for data visualization
 ### streams column
 ```python
 #since the column 'streams' has mixed datatypes, drop the values that aren't numbers then change their datatypes to float
@@ -84,7 +99,7 @@ spotifyclean['in_deezer_playlists'] = spotifyclean['in_deezer_playlists'].str.re
 spotifyclean['in_shazam_charts'] = spotifyclean['in_shazam_charts'].str.replace(',','').astype(int)
 ```
 ### Sorting of rows
-> Sort the rows by number of streams from highest to lowest
+Sort the rows by number of streams from highest to lowest
 ```python
 #Sort the values by the number of streams in descending order
 spotifyclean = spotifyclean.sort_values(by='streams', ascending = False).reset_index(drop=True)
@@ -92,12 +107,12 @@ spotifyclean
 ```
 ![image](https://github.com/user-attachments/assets/4e9cf617-3866-4276-849e-ba60f3d6de62)
 ### Saving of Cleaned Dataset
-> Save the new dataset in a csv file named `Spotify-2023_Cleaned.csv`.
+Save the new dataset in a csv file named `Spotify-2023_Cleaned.csv`.
 ```python
 #write the dataset in a different csv for later use
 spotifyclean.to_csv('Spotify-2023_Cleaned.csv')
 ```
-> For the full code used in this analysis, please see the [Spotify EDA Notebook](SpotifyData.ipynb)
+> For the full code used in this analysis, please see the [Spotify EDA Notebook](Spotify_Clean.ipynb)
 
 ## GUIDE QUESTIONS
 ### Importing of Datasets
@@ -458,8 +473,9 @@ sns.barplot(artistscharts.head(),x = 'artist(s)_name', y = 'total_charts')
 plt.title('Frequency of Artists in Charts')
 ```
 ![image](https://github.com/user-attachments/assets/452af2ce-1ecb-41eb-b9c9-07113836d2d8)
+> For the full code used in this analysis, please see the [Spotify EDA Notebook](SpotifyData.ipynb)
 
-## Insights and Recommendations
+## INSIGHTS AND RECOMMENDATIONS
 - Since the track_name column contains special characters from various languages that `UTF-8` encoding cannot handle, I used `latin1` encoding to import the `spotify-2023.csv` file into the notebook.
 - The dataset includes duplicate songs, missing values, and an unusual string entry in the streams column, which appears to be an error from data collection.
 - The dataset contains columns with object data types that needed to be converted to integers to enable plotting and analysis.
@@ -468,7 +484,7 @@ plt.title('Frequency of Artists in Charts')
 - Additionally, the number of playlists on Spotify is significantly higher than on other platforms, probably because Spotify’s platform was the primary source, skewing the data in its favor.
 - I realized that if certain keys consistently have high streams such as C#, it can indicate listener preference for songs in those musical keys. Major keys are often perceived as more "happy" or "uplifting," while Minor keys might be associated with "emotional" or "moody" songs.
 
-## Changelog
+## CHANGELOG
 ### 1.0 (10/30/24)
 - Initial commit of repository in Github
 - Cleaned the spotify dataset by dropping null values, duplicates, and unwanted values in the `Spotify_Clean.ipynb` file
@@ -489,11 +505,6 @@ plt.title('Frequency of Artists in Charts')
 - Finishing touches in the `SpotifyData.ipynb` file
 - Additions to the readme file
 
-## References
-1. https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-202
-3. https://www.youtube.com/watch?v=iaZQF8SLHJs&ab_channel=Ryan%26MattDataScience
-4. https://www.linkedin.com/advice/0/how-can-you-use-pandas-detect-correct-outliers-skills-data-science-zl5oe#:~:text=Calculate%20the%20IQR%20by%20subtracting,to%20filter%20out%20the%20outliers.
-
 ## BUILT WITH
   - Jupyter Notebook
 
@@ -506,3 +517,8 @@ plt.title('Frequency of Artists in Charts')
 
 ## AUTHOR
   - Cedric Kurt Taguba - [@SuperCedric](https://github.com/SuperCedric)
+
+## REFERENCES
+[^3] https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-202
+[^2] https://www.youtube.com/watch?v=iaZQF8SLHJs&ab_channel=Ryan%26MattDataScience
+[^1] https://www.linkedin.com/advice/0/how-can-you-use-pandas-detect-correct-outliers-skills-data-science-zl5oe#:~:text=Calculate%20the%20IQR%20by%20subtracting,to%20filter%20out%20the%20outliers.
