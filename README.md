@@ -1,3 +1,4 @@
+<a name="top"></a>
 # Exploratory Data Analysis on Spotify 2023 Dataset
 This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spotify Songs 2023` Dataset using Python.
 
@@ -117,6 +118,8 @@ Save the new dataset in a csv file named `Spotify-2023_Cleaned.csv`.
 spotifyclean.to_csv('Spotify-2023_Cleaned.csv')
 ```
 > For the full code used in this analysis, please see the [Spotify-Cleaned Notebook](Spotify_Clean.ipynb)
+
+<p align="right">(<a href="#top">[🔼GO TO TOP]</a>)</p>
 
 <a name="analysis"></a>
 ## DATA ANALYSIS
@@ -493,6 +496,8 @@ plt.show()
 The two graphs compare the top artists in playlists and charts, revealing different aspects of popularity. Eminem leads in playlist inclusions, suggesting sustained listener preference, while Bad Bunny, The Weeknd, and Taylor Swift appear in both playlists and charts, indicating broad and consistent appeal. Bad Bunny tops the charts, implying high recent streaming, whereas artists like Peso Pluma and David Guetta are popular in charts but not in the top playlists. This contrast shows that while some artists have lasting popularity in playlists, others are trending with high streaming volumes in recent periods.
 > For the full code used in this analysis, please see the [Spotify EDA Notebook](SpotifyData.ipynb)
 
+<p align="right">(<a href="#top">[🔼GO TO TOP]</a>)</p>
+
 <a name="IandR"></a>
 ## INSIGHTS AND RECOMMENDATIONS
 - Examining the distribution of songs across different years highlights the importance of consistent, timely releases for artists and record labels to maintain relevance in listeners' playlists.
@@ -541,3 +546,5 @@ The two graphs compare the top artists in playlists and charts, revealing differ
   - Cedric Kurt Taguba - [@SuperCedric](https://github.com/SuperCedric)
 
 This repository is solely for academic purposes only
+
+<p align="right">(<a href="#top">[🔼GO TO TOP]</a>)</p>
