@@ -3,21 +3,22 @@ This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spo
 
 ## TABLE OF CONTENTS
 
-- INTRODUCTION
-- DEPENDENCIES
-- CODE EXPLANATION
-    - DATASET CLEANING
-    - ANALYSIS
-- INSIGHTS AND RECOMMENDATION
-- CHANGELOG
-- BUILT WITH
-- LIBRARIES USED
-- AUTHOR
-- REERENCES
+- [ INTRODUCTION ](#intro)
+- [ DEPENDENCIES ](#deps)
+- [ CODE EXPLANATION ](#code)
+    - [ DATASET CLEANING ](#clean)
+    - [ ANALYSIS ](#analysis)
+- [ INSIGHTS AND RECOMMENDATION ](#IandR) 
+- [ CHANGELOG ](#changelog)
+- [ BUILT WITH ](#builtwith)
+- [ LIBRARIES USED ](#libs)
+- [ AUTHOR ](#author)
 
+<a name="intro"></a>
 ## INTRODUCTION
 This project presents an exploratory data analysis (EDA) of a Spotify dataset containing detailed information about various music tracks, artists, and playlists. The primary objective is to uncover patterns and trends related to musical characteristics, popularity metrics, temporal release trends, and platform preferences, which can provide insights to artists, labebls, and streaming services. To ensure a clear and logical flow of analysis, we have outlined guiding questions to address.
 
+<a name="deps"></a>
 ## DEPENDENCIES
 1. Pandas: for data manipulation and cleaning.
 ```
@@ -39,7 +40,9 @@ import seaborn as sns
 ```
 from scipy.stats import zscore
 ```
+<a name="code"></a>
 # CODE EXPLANATION
+<a name="clean"></a>
 ## DATASET CLEANING
 Before addressing the guide questions, it's essential to clean the dataset to ensure data accuracy, consistency, and reliability of the analysis. Removing errors, duplicates, incomplete entries helps prevent skewed results and enhances the quality of insights. Standardizing formats and datatypes also allow for smoother comparisons and easier manipulation across analyses.
 
@@ -113,18 +116,20 @@ Save the new dataset in a csv file named `Spotify-2023_Cleaned.csv`.
 #write the dataset in a different csv for later use
 spotifyclean.to_csv('Spotify-2023_Cleaned.csv')
 ```
-> For the full code used in this analysis, please see the [Spotify EDA Notebook](Spotify_Clean.ipynb)
+> For the full code used in this analysis, please see the [Spotify-Cleaned Notebook](Spotify_Clean.ipynb)
 
-## GUIDE QUESTIONS
+<a name="analysis"></a>
+## DATA ANALYSIS
+### Guide Questions
 ### Importing of Datasets
-> Firstly, import the raw version of the dataset
+Firstly, import the raw version of the dataset
 ```python
 #read the uncleaned dataset from the csv file for references
 uncleaned = pd.read_csv('spotify-2023.csv', encoding = 'latin1')
 uncleaned
 ```
 ![image](https://github.com/user-attachments/assets/082da17f-d58a-45e5-b6f6-71daf87ca08c)
-> Next, import the cleaned version of the dataset
+Next, import the cleaned version of the dataset
 ```python
 #read the cleaned dataset from the csv file
 spotifydf = pd.read_csv('spotify-2023_Cleaned.csv', index_col = 0)
@@ -171,27 +176,24 @@ streams_statsdf = pd.DataFrame({'Stream Statistics':['Mean', 'Median', 'Standard
 streams_statsdf
 ```
 ![image](https://github.com/user-attachments/assets/f9966382-49d3-4532-966d-c27c56730a93)
-- What is the distribution of released_year and artist_count? Are there any noticeable trends or outliers?
+- What is the distribution of released_year?
 ```python
 #graphing of distribution plot of the number of songs as a function of their release date
 sns.displot(spotifydf, x = 'released_year', aspect = 2, kde = True, discrete = True)
 ```
 ![image](https://github.com/user-attachments/assets/436bbce7-d724-401a-8b5e-c836caed24c1)
-Because the number of years are highly numbered, its count should be lessened in order to analyze the trend of the graph more clearly. To shorten it, let's eliminate some outliers and limit the span of the years from 2000 - 2023.
+
+To improve the clarity of trend analysis in the graph, the time span should be narrowed by excluding certain outliers and restricting the range to 2000-2023.
 ```python
 #graphing of distribution plot of the number of songs as a function of their release date
 sns.displot((spotifydf[spotifydf['released_year'] >= 2000]), x = 'released_year', aspect = 2, kde = True, discrete = True)
 plt.title('Number of Songs in Every Year above 2000 Distribution Graph')
 ```
 ![image](https://github.com/user-attachments/assets/e5291f9e-1e26-4209-9f28-d87e71f702d2)
-!
+! The graph suggests that the top songs are heavily dominated by recent releases, especially from 2020 onward. Older songs, particularly those from before 2015, have limited representation, highlighting a trend where older music struggles to maintain high streaming numbers.
 - Any noticeable trends?
-```python
-#to check the span of the lower and upper bound of the released years
-print("The songs released span from", min(spotifydf['released_year']), "to", max(spotifydf['released_year']))
-```
-![image](https://github.com/user-attachments/assets/7008d00b-ed74-47f6-afbf-9a75bad47792)
-!
+
+This graph suggests that there is a strong preference for newer music or Spotify's tendency to promote recent tracks, while music struggles to maintain high streaming numbers as the song gets older.
 - Any outliers?
 ```python
 def outlier(df, column):
@@ -209,7 +211,7 @@ def outlier(df, column):
 print('In the distribution graph of "released_year", there are', outlier(spotifydf, 'released_year').shape[0] ,'outliers.')
 ```
 ![image](https://github.com/user-attachments/assets/662616aa-0c14-4251-8c48-ae9d75a622fd)
-!
+Outliers in this context mean that there are 180 instances of certain years that have unusually high or unusually low number of songs, contradicting to the trend.
 - What is the distribution of artist_count?
 ```python
 #graphing of distribution plot of number of songs as a function of the number of artists included in the song
@@ -220,16 +222,19 @@ plt.title('Artist Count Distribution Graph')
 plt.ylabel('Number of Songs')
 ```
 ![image](https://github.com/user-attachments/assets/eb095711-ef49-4257-96d9-7a63159d38b2)
-!
+
+This bar graph includes the number of songs according to artist count of each song.
 - Any noticeable trends?
-!
+
+When analyzing the graph, we notice that the most popular songs are solo performances, with a noticeable drop for songs with two artists, continuing on until 8 artists. Pattern indicates that while collaborations are popular, tracks with a large number of artists are relatively rare among the most-streamed songs.
 - Any outliers?
 ```python
 #print the number of outliers using the user-defined outlier function
 print('In the distribution graph of "artist_count", there are', outlier(spotifydf, 'artist_count').shape[0] ,'outliers.')
 ```
 ![image](https://github.com/user-attachments/assets/bbe8bb99-2887-4ae2-8971-ca969aabb16b)
-!
+
+Having 24 outliers indicate that there are 24 instances where the number of artists in a song is relatively high compared to the trend, such as the songs with 6 - 8 artists.
 ### Top Performers
 - Which track has the highest number of streams? Display the top 5 most streamed tracks.
 ```python
@@ -245,7 +250,6 @@ plt.tick_params(axis = 'x',rotation = 12)
 plt.title('Top 5 Most Streamed Songs')
 ```
 ![image](https://github.com/user-attachments/assets/6c43dcf3-27a6-4f08-97df-6fb8e0c7fca9)
-!
 - Who are the top 5 most frequent artists based on the number of tracks in the dataset?
 ```python
 #split the strings in 'artist(s)_name' to separate all artists involved in a list
@@ -253,7 +257,6 @@ spotifydf['artist(s)_name'] = spotifydf['artist(s)_name'].str.split(',')
 spotifydf
 ```
 ![image](https://github.com/user-attachments/assets/ea2b15c5-7860-455c-b890-6773a31ce21a)
-!
 ```python
 #create a new dataframe to separate all the list of artists in a different column
 artistsdf = (spotifydf.loc[:, ['artist(s)_name']]).explode('artist(s)_name')
@@ -285,6 +288,8 @@ plt.title('Number of Tracks Released per Year')
 plt.ylabel('Number of Tracks')
 ```
 ![image](https://github.com/user-attachments/assets/3f33b812-fc79-4acb-ad6a-4f07c4798a89)
+
+This graph closely resembles the previous bar graph but highlights a more specific trend rather than a general one. It shows that most outliers come from years prior to 2000, as the graph is nearly flat in terms of the number of songs for those years.
 - Does the number of tracks released per month follow any noticeable patterns? Which month sees the most releases?
 ```python
 #create a line graph of the number of tracks released per month
@@ -297,7 +302,8 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct',
 plt.xticks(ticks = monthlytracks.index, labels = months)
 ```
 ![image](https://github.com/user-attachments/assets/10449dba-a356-4b03-88da-71bd8f7f2d46)
-!
+
+Upon analyzing the graph, there appears to be no clear pattern in the number of songs released per month. It may be useful to examine if any seasonal trends are present.
 ```python
 #for loop to create line plots the years 2015 to 2024
 plt.figure(figsize=(12,6))
@@ -310,7 +316,8 @@ plt.ylabel('Number of Tracks')
 plt.xticks(ticks = monthlytracks.index, labels = months)
 ```
 ![image](https://github.com/user-attachments/assets/a06eab70-9573-41c3-b446-092f351edb8f)
-!
+
+Once again, no distinct seasonal trend emerges in the monthly release patterns, suggesting there isn’t a universally “best” or “worst” month for artists or labels to release music—unless the song is specifically tied to a season, such as Halloween or Christmas.
 ### Genre and Music Characteristics
 - Examine the correlation between streams and musical attributes like bpm, danceability_%, and energy_%. Which attributes seem to influence streams the most?
 ```python
@@ -320,7 +327,8 @@ sns.heatmap(spotifydf[['streams','bpm','danceability_%','valence_%','energy_%','
 plt.title('Correlation of Streams and Music Characteristics')
 ```
 ![image](https://github.com/user-attachments/assets/bc8fa0e8-abee-4434-b264-cf7b923d6833)
-!
+
+To determine which characteristics significantly influence streams, we’ll consider a correlation value of 0.3 or higher as the threshold for meaningful influence. Values below 0.3 indicate negligible influence. After analyzing the heatmap, we observe that none of the characteristics demonstrate a strong impact on the number of streams. Among them, speechiness% has the highest correlation with streams at -0.1, but this value is too low to suggest any meaningful influence. In conclusion, the analyzed characteristics have minimal effect on stream counts, indicating that a song's popularity is influenced by factors beyond attributes like BPM or danceability, which remain unknown.
 - Is there a correlation between danceability_% and energy_%?
 ```python
 #create a heatmap of the correlation of streams to the 6 other variables
@@ -329,9 +337,10 @@ sns.heatmap(spotifydf[['danceability_%','valence_%','energy_%','acousticness_%']
 plt.title('Correlation of Different Music Characteristics')
 ```
 ![image](https://github.com/user-attachments/assets/19ccbeb1-99c5-42d6-b280-e6732e4c3df1)
-!
-- How about valence_% and acousticness_%?
 
+Similarly, the correlation between danceability (%) and energy (%) is too weak to be considered a significant factor influencing the number of streams.
+- How about valence_% and acousticness_%?
+For the third time, the correlation between valence (%) and acousticness (%) is negligible, as it falls below the 0.3 correlation threshold.
 ### Platform Popularity
 - How do the numbers of tracks in spotify_playlists, spotify_charts, and apple_playlists compare? Which platform seems to favor the most popular tracks?
 ```python
@@ -352,6 +361,7 @@ plt.title('Number of Playlists in each Platform')
 ```
 ![image](https://github.com/user-attachments/assets/7b0128bb-ee72-454e-8a29-7d72efbe0a13)
 
+The bar chart indicates that Spotify has a clear advantage over the other two platforms in promoting the most popular tracks. However, it's important to note that this may reflect a bias since the data was collected exclusively from Spotify's platform. To achieve a more objective comparison, it would be beneficial to examine the top-streamed songs on Apple Music and Deezer as well. Comparing the data from these platforms alongside Spotify’s would provide a more comprehensive understanding of how each platform favors popular tracks, but that analysis will be explored separately.
 ### Advanced Analysis
 - Based on the streams data, can you identify any patterns among tracks with the same key or mode (Major vs. Minor)?
 #### Keys
@@ -364,7 +374,8 @@ sns.barplot(streamsofkeys, x = 'key', y = 'streams', hue = 'key', palette = 'mut
 plt.title('Number of Streams per Key')
 ```
 ![image](https://github.com/user-attachments/assets/e77895f8-7cf0-4c62-be8e-8903268de771)
-!
+
+The bar graph shows that the popularity of songs across different keys is fairly evenly distributed, with one notable exception: the C# key, which has a significantly higher number of streams compared to the others. This is understandable, as the distribution is not normalized, and the high number of songs in the C# key, being the most used key according to Hooktheory.com, heavily influences its data.
 ```python
 #import necessary library to use z-score function
 from scipy.stats import zscore
@@ -386,13 +397,14 @@ plt.xlabel('Key')
 plt.ylabel('Z-Score of Streams')
 ```
 ![image](https://github.com/user-attachments/assets/fa0e8baf-0566-4b57-a1a4-7d426ddce3b0)
-!
 ```python
 print(streamsofkeys)
 print('The average number of streams of all the songs is', np.floor(streamsofkeys['streams'].mean()))
 ```
 ![image](https://github.com/user-attachments/assets/7a3233a6-6cef-4142-b383-4e5e5137841b)
-!
+
+Before analyzing the graph, it is crucial to set thresholds for proper interpretation. A negative z-score indicates that a bar represents a track with fewer streams than the average, while a positive z-score indicates it has more streams than average. The greater the absolute value of the z-score, the more significant the deviation from the average. Once the interpretation method is clarified, it can be observed that five keys have stream counts above the average, while four keys have counts below the average.
+The graph shows that the standings of the keys remain unchanged, with C# still being the highest-streamed key and D# continuing to be the lowest-streamed key.
 #### Modes
 ```python
 streamsofmodes = spotifydf[['streams','mode']].groupby('mode').sum('streams').reset_index().sort_values('streams', ascending = False)
@@ -401,16 +413,15 @@ sns.barplot(spotifydf, x = 'mode', y = 'streams')
 plt.title('Number of Streams of Major vs Minor')
 ```
 ![image](https://github.com/user-attachments/assets/32c54d0b-17a1-46d7-aa9b-f53b314e61e2)
-
 ```python
 plt.figure(figsize=(12,6))
 sns.violinplot(spotifydf,x = 'mode', y = 'streams')
 plt.title('Number of Streams of Major vs Minor')
 ```
-![image](https://github.com/user-attachments/assets/355686e2-20a6-418b-8915-c2955d8694d1)
-!
+![image](https://github.com/user-attachments/assets/3f85612d-957e-414b-8096-0f799fdc8a7d)
+
+The graph clearly shows a pattern in the distribution of streams between Minor and Major modes, with most songs falling within the 0 to 1 billion stream range. Furthermore, the majority of outliers are concentrated at the peak of the stream count, as opposed to the lower end of the distribution.
 - Do certain genres or artists consistently appear in more playlists or charts? Perform an analysis to compare the most frequently appearing artists in playlists or charts.
-#### Playlists
 ```python
 #create a new column with the sum of the playlists in all platforms
 spotifydf['total_playlists'] = spotifydf['in_spotify_playlists'] + spotifydf['in_apple_playlists'] + spotifydf['in_deezer_playlists']
@@ -433,17 +444,7 @@ artistsplaylists.index = range(1, len(artistsplaylists) + 1)
 #display the top 5 most frequently appearing artist in playlists
 artistsplaylists.head()
 ```
-![image](https://github.com/user-attachments/assets/480bdaf4-67b8-4a34-a212-16c491d2c7e3)
-!
-```python
-#create the barplot to visualize the differences in their frequency
-plt.figure(figsize=(12,6))
-sns.barplot(artistsplaylists.head(),x = 'artist(s)_name', y = 'total_playlists')
-plt.title('Frequency of Artists in Playlists')
-```
-![image](https://github.com/user-attachments/assets/7e9009f4-abeb-40e7-bbc6-403bc5085c4b)
-!
-#### Charts
+![image](https://github.com/user-attachments/assets/355686e2-20a6-418b-8915-c2955d8694d1)
 ```python
 #create a new column with the sum of the charts in all platforms
 spotifydf['total_charts'] = spotifydf['in_spotify_charts'] + spotifydf['in_apple_charts'] + spotifydf['in_deezer_charts'] + spotifydf['in_shazam_charts']
@@ -468,23 +469,40 @@ artistscharts.head()
 ```
 ![image](https://github.com/user-attachments/assets/77c2f70a-4dcc-4273-8538-be24125519b1)
 ```python
-#create the barplot to visualize the differences in their frequency
-plt.figure(figsize=(12,6))
-sns.barplot(artistscharts.head(),x = 'artist(s)_name', y = 'total_charts')
-plt.title('Frequency of Artists in Charts')
+#set up the figure and axes for two subplots
+fig, axes = plt.subplots(1, 2, figsize=(18, 6))
+
+#plot for frequency of artists in playlists
+sns.barplot(data=artistsplaylists.head(), x='artist(s)_name', y='total_playlists', ax=axes[0])
+axes[0].set_title('Frequency of Artists in Playlists')
+axes[0].set_xlabel('Artist')
+axes[0].set_ylabel('Total Playlists')
+
+#plot for frequency of artists in charts
+sns.barplot(data=artistscharts.head(), x='artist(s)_name', y='total_charts', ax=axes[1])
+axes[1].set_title('Frequency of Artists in Charts')
+axes[1].set_xlabel('Artist')
+axes[1].set_ylabel('Total Charts')
+
+#adjust layout for readability
+plt.tight_layout()
+plt.show()
 ```
-![image](https://github.com/user-attachments/assets/452af2ce-1ecb-41eb-b9c9-07113836d2d8)
+![image](https://github.com/user-attachments/assets/1bbb3e07-e1ed-445b-8a37-6df5da04feee)
+
+The two graphs compare the top artists in playlists and charts, revealing different aspects of popularity. Eminem leads in playlist inclusions, suggesting sustained listener preference, while Bad Bunny, The Weeknd, and Taylor Swift appear in both playlists and charts, indicating broad and consistent appeal. Bad Bunny tops the charts, implying high recent streaming, whereas artists like Peso Pluma and David Guetta are popular in charts but not in the top playlists. This contrast shows that while some artists have lasting popularity in playlists, others are trending with high streaming volumes in recent periods.
 > For the full code used in this analysis, please see the [Spotify EDA Notebook](SpotifyData.ipynb)
 
+<a name="IandR"></a>
 ## INSIGHTS AND RECOMMENDATIONS
-- Since the track_name column contains special characters from various languages that `UTF-8` encoding cannot handle, I used `latin1` encoding to import the `spotify-2023.csv` file into the notebook.
-- The dataset includes duplicate songs, missing values, and an unusual string entry in the streams column, which appears to be an error from data collection.
-- The dataset contains columns with object data types that needed to be converted to integers to enable plotting and analysis.
+- Examining the distribution of songs across different years highlights the importance of consistent, timely releases for artists and record labels to maintain relevance in listeners' playlists.
+- In the distribution graph showing the number of songs per artist count, a potential factor could be that the number of songs released by solo artists—many of which may not even appear among the most streamed—is significantly higher compared to songs featuring three or more artists, leading to a higher sample size.
 - Analyzing the distribution of `released_year` reveals a trend where songs released closer to 2023 tend to have more streams, suggesting that newer songs generally attract more listeners.
 - There is also a noticeable decline in the count of songs from 2023, likely due to the limited time newer tracks have had to accumulate streams.
 - Additionally, the number of playlists on Spotify is significantly higher than on other platforms, probably because Spotify’s platform was the primary source, skewing the data in its favor.
 - I realized that if certain keys consistently have high streams such as C#, it can indicate listener preference for songs in those musical keys. Major keys are often perceived as more "happy" or "uplifting," while Minor keys might be associated with "emotional" or "moody" songs.
 
+<a name="changelog"></a>
 ## CHANGELOG
 ### 1.0 (10/30/24)
 - Initial commit of repository in Github
@@ -506,9 +524,11 @@ plt.title('Frequency of Artists in Charts')
 - Finishing touches in the `SpotifyData.ipynb` file
 - Additions to the readme file
 
+<a name="builtwith"></a>
 ## BUILT WITH
   - Jupyter Notebook
 
+<a name="libs"></a>
 ## LIBRARIES USED
   - PYTHON
     - Pandas
@@ -516,10 +536,8 @@ plt.title('Frequency of Artists in Charts')
     - Seaborn
     - Scipy
 
+<a name="author"></a>
 ## AUTHOR
   - Cedric Kurt Taguba - [@SuperCedric](https://github.com/SuperCedric)
 
-## REFERENCES
-[^3]: https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-202
-[^2]: https://www.youtube.com/watch?v=iaZQF8SLHJs&ab_channel=Ryan%26MattDataScience
-[^1]: https://www.linkedin.com/advice/0/how-can-you-use-pandas-detect-correct-outliers-skills-data-science-zl5oe#:~:text=Calculate%20the%20IQR%20by%20subtracting,to%20filter%20out%20the%20outliers.
+This repository is solely for academic purposes only
