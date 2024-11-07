@@ -1,5 +1,5 @@
 <a name="top"></a>
-# Exploratory Data Analysis on Spotify 2023 Dataset
+# Exploratory Data Analysis on Spotify 2023 Dataset🎶
 This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spotify Songs 2023` Dataset using Python.
 
 ## TABLE OF CONTENTS
@@ -16,11 +16,11 @@ This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spo
 - [ AUTHOR ](#author)
 - [ REFERENCES ](#ref)
 <a name="intro"></a>
-## INTRODUCTION
+## INTRODUCTION📌
 This project presents an exploratory data analysis (EDA) of a Spotify dataset containing detailed information about various music tracks, artists, and playlists. The primary objective is to uncover patterns and trends related to musical characteristics, popularity metrics, temporal release trends, and platform preferences, which can provide insights to artists, labebls, and streaming services. To ensure a clear and logical flow of analysis, we have outlined guiding questions to address.
 
 <a name="deps"></a>
-## DEPENDENCIES
+## DEPENDENCIES📌
 1. Pandas: for data manipulation and cleaning.
 ```
 import pandas as pd
@@ -42,9 +42,9 @@ import seaborn as sns
 from scipy.stats import zscore
 ```
 <a name="code"></a>
-# CODE EXPLANATION
+# CODE EXPLANATION📌
 <a name="clean"></a>
-## DATASET CLEANING
+## DATASET CLEANING📌
 Before addressing the guide questions, it's essential to clean the dataset to ensure data accuracy, consistency, and reliability of the analysis. Removing errors, duplicates, incomplete entries helps prevent skewed results and enhances the quality of insights. Standardizing formats and datatypes also allow for smoother comparisons and easier manipulation across analyses.
 
 ### Included in the `Spotify_Clean.ipynb` file are the Python codes used for data cleaning processes:
@@ -122,7 +122,7 @@ spotifyclean.to_csv('Spotify-2023_Cleaned.csv')
 <p align="right">(<a href="#top">[🔼GO TO TOP]</a>)</p>
 
 <a name="analysis"></a>
-## DATA ANALYSIS
+## DATA ANALYSIS📌
 ### Guide Questions
 ### Importing of Datasets
 Firstly, import the raw version of the dataset
@@ -499,7 +499,7 @@ The two graphs compare the top artists in playlists and charts, revealing differ
 <p align="right">(<a href="#top">[🔼GO TO TOP]</a>)</p>
 
 <a name="IandR"></a>
-## INSIGHTS AND RECOMMENDATIONS
+## INSIGHTS AND RECOMMENDATIONS📌
 - Examining the distribution of songs across different years highlights the importance of consistent, timely releases for artists and record labels to maintain relevance in listeners' playlists.
 - In the distribution graph showing the number of songs per artist count, a potential factor could be that the number of songs released by solo artists—many of which may not even appear among the most streamed—is significantly higher compared to songs featuring three or more artists, leading to a higher sample size.
 - Analyzing the distribution of `released_year` reveals a trend where songs released closer to 2023 tend to have more streams, suggesting that newer songs generally attract more listeners.
@@ -508,7 +508,7 @@ The two graphs compare the top artists in playlists and charts, revealing differ
 - I realized that if certain keys consistently have high streams such as C#, it can indicate listener preference for songs in those musical keys. Major keys are often perceived as more "happy" or "uplifting," while Minor keys might be associated with "emotional" or "moody" songs.
 
 <a name="changelog"></a>
-## CHANGELOG
+## CHANGELOG📌
 ### 1.0 (10/30/24)
 - Initial commit of repository in Github
 - Cleaned the spotify dataset by dropping null values, duplicates, and unwanted values in the `Spotify_Clean.ipynb` file
@@ -519,22 +519,22 @@ The two graphs compare the top artists in playlists and charts, revealing differ
 - Initial commit of the `SpotifyData.ipynb` file
 - Additional changes to the readme file
 
-### 1.3 (11/1/24 - 11/4/24)
+### 1.3 (11/1/24 - 11/6/24)
 - Adjustments and additions in the `Spotify_Clean.ipynb` file
 - Adjustments and additions in the `SpotifyData.ipynb` file
 - Additional changes to the readme file
 
-### 1.4 (11/5/24)
-- Finishing touches in the `Spotify_Clean.ipynb` file
-- Finishing touches in the `SpotifyData.ipynb` file
-- Additions to the readme file
+### 1.4 (11/7/24)
+- Proofreading and finishing touches in the `Spotify_clean.ipynb` file
+- Proofreading and finishing touches in the `SpotifyData.ipynb` file
+- Final revisions in the readme file
 
 <a name="builtwith"></a>
-## BUILT WITH
+## BUILT WITH📌
   - Jupyter Notebook
 
 <a name="libs"></a>
-## LIBRARIES USED
+## LIBRARIES USED📌
   - PYTHON
     - Pandas
     - Matplotlib
@@ -542,13 +542,13 @@ The two graphs compare the top artists in playlists and charts, revealing differ
     - Scipy
 
 <a name="author"></a>
-## AUTHOR
+## AUTHOR📌
   - Cedric Kurt Taguba - [@SuperCedric](https://github.com/SuperCedric)
 
 <a name ="ref"></a>
-## REFERENCES
+## REFERENCES📌
 1. https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023
    
-This repository is solely for academic purposes only
+This repository is solely for academic purposes only.
 
 <p align="right">(<a href="#top">[🔼GO TO TOP]</a>)</p>
