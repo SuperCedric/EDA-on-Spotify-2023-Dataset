@@ -14,7 +14,7 @@ This respository includes an Exploratory Data Anaylsis on the `Most Streamed Spo
 - [ BUILT WITH ](#builtwith)
 - [ LIBRARIES USED ](#libs)
 - [ AUTHOR ](#author)
-
+- [ REFERENCES ](#ref)
 <a name="intro"></a>
 ## INTRODUCTION
 This project presents an exploratory data analysis (EDA) of a Spotify dataset containing detailed information about various music tracks, artists, and playlists. The primary objective is to uncover patterns and trends related to musical characteristics, popularity metrics, temporal release trends, and platform preferences, which can provide insights to artists, labebls, and streaming services. To ensure a clear and logical flow of analysis, we have outlined guiding questions to address.
@@ -545,6 +545,10 @@ The two graphs compare the top artists in playlists and charts, revealing differ
 ## AUTHOR
   - Cedric Kurt Taguba - [@SuperCedric](https://github.com/SuperCedric)
 
+<a name ="ref"></a>
+## REFERENCES
+1. https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023
+   
 This repository is solely for academic purposes only
 
 <p align="right">(<a href="#top">[🔼GO TO TOP]</a>)</p>
